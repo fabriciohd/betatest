@@ -69,7 +69,6 @@ class Createalltables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
         Schema::dropIfExists('characters');
         Schema::dropIfExists('comics');
         Schema::dropIfExists('movies');
