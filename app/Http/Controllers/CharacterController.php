@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Validator;
 use App\Models\Character;
 use App\Models\Movie;
 use App\Models\Serie;
@@ -173,6 +174,122 @@ class CharacterController extends Controller
             $array['error'] = 'Personagem não encontrado';
             return response()->json($array, 404);
         }
+
+        return $array;
+    }
+
+    public function addCharacter(Request $request) {
+        $array = ['error' => ''];
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:characters',
+            'real_name' => 'required',
+            'resume' => 'required',
+            'image' => 'file|mimes:jpg,png'
+        ]);
+
+        if (!$validator->fails()) {
+            $newCharacter = new Character;
+            $newCharacter->name = $request->input('name');
+            $newCharacter->real_name = $request->input('real_name');
+            $newCharacter->resume = $request->input('resume');
+            $newCharacter->id_comics = $request->input('id_comics');
+            $newCharacter->id_movies = $request->input('id_movies');
+            $newCharacter->id_series = $request->input('id_series');
+            if ($request->input('cover_url') || $request->file('image')) {
+                if ($request->input('cover_url')) {
+                    $newCharacter->cover_url = $request->input('cover_url');
+                } else {
+                    $image = $request->file('image')->store('public');
+                    $imageName = explode('public/', $image);
+                    $newCharacter->cover_url = asset('storage/'.$imageName[1]);
+                }                
+            }
+            $newCharacter->save();
+            
+            $array['results'] = 'Personagem criado com sucesso!';
+        } else {
+            $array['error'] = $validator->errors()->first();
+            return response()->json($array, 422);
+        }
+
+        return $array;
+    }
+
+    public function setCharacter($id, Request $request) {
+        $array = ['error' => ''];
+
+        if (!Character::find($id)) {
+            $array['error'] = 'Personagem não encontrado';
+            return response()->json($array, 404);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'image' => 'file|mimes:jpg,png'
+        ]);
+        if (!$validator) {
+            $array['error'] = $validator->errors()->first();
+            return response()->json($array, 422);
+        }
+
+        $name = $request->input('name');
+        $real_name = $request->input('real_name');
+        $resume = $request->input('resume');
+        $cover_url = $request->input('cover_url');
+        $image = $request->file('image');
+        $id_comics = $request->input('id_comics');
+        $id_movies = $request->input('id_movies');
+        $id_series = $request->input('id_series');
+        
+        $updates = [];
+        if ($name) {
+            $updates['name'] = $name;
+        }
+        if ($real_name) {
+            $updates['real_name'] = $real_name;
+        }
+        if ($resume) {
+            $updates['resume'] = $resume;
+        }
+        if ($id_comics) {
+            $updates['id_comics'] = $id_comics;
+        }
+        if ($id_movies) {
+            $updates['id_movies'] = $id_movies;
+        }
+        if ($id_series) {
+            $updates['id_series'] = $id_series;
+        }
+        if ($cover_url || $request->hasFile('image')) {
+            if ($cover_url) {
+                $updates['cover_url'] = $cover_url;
+            } else {
+                $image = $request->file('image')->store('public');
+                $imageName = explode('public/', $image);
+                $updates['cover_url'] = asset('storage/'.$imageName[1]);
+            }
+        }
+
+        $query = Character::where('id', $id)
+        ->update($updates);  
+        
+        $array['results'] = 'Alteração efetuada com sucesso!';
+
+        return $array;
+    }
+
+    public function delCharacter($id) {
+        $array = ['error' => ''];
+
+        if (!Character::find($id)) {
+            $array['error'] = 'Personagem não encontrado';
+            return response()->json($array, 404);            
+        }
+
+        Character::find($id)->delete();
+
+        $array['results'] = 'Personagem excluído com sucesso!';
+
 
         return $array;
     }

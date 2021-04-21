@@ -24,13 +24,15 @@ use App\Http\Controllers\{
 */
 
 Route::get('/ping', function() {
-    return 'pong';
+    echo auth()->guard('api')->check();
+    
+    /* return ['pong' => true]; */
 });
 
 //rotas publicas
 Route::get('/401', [AuthController::class, 'unauthorized'])->name('login'); //OK
-Route::post('/auth/login', [AuthController::class, 'login']);
-Route::post('/auth/register', [AuthController::class, 'register']);
+Route::post('/auth/login', [AuthController::class, 'login']); //OK
+Route::post('/auth/register', [AuthController::class, 'register']); //OK
 
 
 Route::get('/characters', [CharacterController::class, 'getList']); //OK
@@ -72,32 +74,46 @@ Route::get('/serie/{id}/images', [SerieController::class, 'getImages']); //OK
 
 
 //Rotas autenticadas
-Route::middleware('auth:api')->group(function(){
-    Route::post('/auth/validate', [AuthController::class, 'validateToken']);
-    Route::post('/auth/logout', [AuthController::class, 'logout']); //OK
-    
+Route::post('/auth/logout', [AuthController::class, 'logout'])->middleware('auth:api'); //OK
+
+Route::middleware(['auth:api', 'check.editor'])->group(function(){
     //Rotas para editores
-    Route::post('/character', [CharacterController::class, 'addCharacter']);
-    Route::put('/character{id}', [CharacterController::class, 'setCharacter']);
-    Route::delete('/character{id}', [CharacterController::class, 'delCharacter']);    
+    Route::post('/character', [CharacterController::class, 'addCharacter']); //OK
+    //inputs: name, real_name, resume
+    //inputs opcionais: cover_url, id_comics, id_movies, id_series, image
+    Route::put('/character/{id}', [CharacterController::class, 'setCharacter']); //OK
+    //inputs opcionais: name, real_name, resume, cover_url, id_comics, id_movies, id_series
+    Route::delete('/character/{id}', [CharacterController::class, 'delCharacter']);  //OK  
     
-    Route::post('/comic', [ComicController::class, 'addComic']);
-    Route::put('/comic{id}', [ComicController::class, 'setComic']);
-    Route::delete('/comic{id}', [ComicController::class, 'delComic']);
+    Route::post('/comic', [ComicController::class, 'addComic']); //OK
+    //inputs: title, published_date, writer, penciler, resume
+    //input opcional: cover_url, image
+    Route::put('/comic/{id}', [ComicController::class, 'setComic']); //OK
+    //inputs opcionais: title, published_date, writer, penciler, resume, cover_url, image
+    Route::delete('/comic/{id}', [ComicController::class, 'delComic']); //OK
     
-    Route::post('/movie', [MovieController::class, 'addMovie']);
-    Route::put('/movie{id}', [MovieController::class, 'setMovie']);
-    Route::delete('/movie{id}', [MovieController::class, 'delMovie']);
+    Route::post('/movie', [MovieController::class, 'addMovie']); //OK
+    //inputs: title, release_date, director, resume
+    //input opcional: cover_url, image
+    Route::put('/movie/{id}', [MovieController::class, 'setMovie']); //OK
+    //inputs opcionais: title, release_date, director, resume, cover_url, image
+    Route::delete('/movie/{id}', [MovieController::class, 'delMovie']); //OK
 
-    Route::post('/serie', [SerieController::class, 'addSerie']);
-    Route::put('/serie{id}', [SerieController::class, 'setSerie']);
-    Route::delete('/serie{id}', [SerieController::class, 'delSerie']);
+    Route::post('/serie', [SerieController::class, 'addSerie']); //OK
+    //inputs: title, release_date, director, resume
+    //input opcional: cover_url, image
+    Route::put('/serie/{id}', [SerieController::class, 'setSerie']); //OK
+    //inputs opcionais: title, release_date, director, resume, cover_url, image
+    Route::delete('/serie/{id}', [SerieController::class, 'delSerie']); //OK
+});
 
+Route::middleware(['auth:api', 'check.adm'])->group(function(){
     //Rotas para administrador
     Route::get('/users', [UserController::class, 'getList']);
     Route::put('/approve', [UserController::class, 'approveUser']);
     Route::delete('/user', [UserController::class, 'deleteUser']);
 });
+
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
