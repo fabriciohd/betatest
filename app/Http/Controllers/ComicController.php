@@ -24,8 +24,7 @@ class ComicController extends Controller
         }
         if ($character) {
             $character = Character::find($character);
-            if ($character) {  
-                $array['res'] = $character['id_comics'];
+            if ($character) {
                 $character = explode(',', $character['id_comics']);
                 $query->whereIn('id', $character);
             } else {

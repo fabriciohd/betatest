@@ -52,16 +52,18 @@ Route::get('/comics', [ComicController::class, 'getList']); //OK
 Route::get('/comic/{id}', [ComicController::class, 'getComic']); //OK
 
 Route::get('/comic/{id}/characters', [ComicController::class, 'getCharacters']); //OK
-
+//retornar id, nome, cover
 Route::get('/comic/{id}/images', [ComicController::class, 'getImages']); //OK 
 //input: limit, offset
 
-Route::get('/movies', [MovieController::class, 'getList']);
+Route::get('/movies', [MovieController::class, 'getList']); //OK
 //input: title,character,limit,offset
-Route::get('/movie/{id}', [MovieController::class, 'getMovie']);
-Route::get('/movie/{id}/characters', [MovieController::class, 'getCharacters']); //retornar id, nome, cover
-Route::get('/movie/{id}/images', [MovieController::class, 'getImages']); //fazer paginação
+Route::get('/movie/{id}', [MovieController::class, 'getMovie']); //OK
 
+Route::get('/movie/{id}/characters', [MovieController::class, 'getCharacters']); //OK
+//retornar id, nome, cover
+Route::get('/movie/{id}/images', [MovieController::class, 'getImages']); //OK
+//input: limit, offset
 
 Route::get('/series', [SerieController::class, 'getList']); //fazer paginação
 Route::get('/serie{id}', [SerieController::class, 'getSerie']);
