@@ -47,13 +47,17 @@ Route::get('/character/{id}/images', [CharacterController::class, 'getImages']);
 //input: limit, offset
 
 
-Route::get('/comics', [ComicController::class, 'getList']); //fazer paginação
-Route::get('/comic/{id}', [ComicController::class, 'getComic']);
-Route::get('/comic/{id}/characters', [ComicController::class, 'getCharacters']); //retornar id, nome, cover
-Route::get('/comic/{id}/images', [ComicController::class, 'getImages']); //fazer paginação
+Route::get('/comics', [ComicController::class, 'getList']); //OK
+//input: title,character,limit,offset
+Route::get('/comic/{id}', [ComicController::class, 'getComic']); //OK
 
+Route::get('/comic/{id}/characters', [ComicController::class, 'getCharacters']); //OK
 
-Route::get('/movies', [MovieController::class, 'getList']); //fazer paginação
+Route::get('/comic/{id}/images', [ComicController::class, 'getImages']); //OK 
+//input: limit, offset
+
+Route::get('/movies', [MovieController::class, 'getList']);
+//input: title,character,limit,offset
 Route::get('/movie/{id}', [MovieController::class, 'getMovie']);
 Route::get('/movie/{id}/characters', [MovieController::class, 'getCharacters']); //retornar id, nome, cover
 Route::get('/movie/{id}/images', [MovieController::class, 'getImages']); //fazer paginação
@@ -68,7 +72,7 @@ Route::get('/serie{id}/images', [SerieController::class, 'getImages']); //fazer 
 //Rotas autenticadas
 Route::middleware('auth:api')->group(function(){
     Route::post('/auth/validate', [AuthController::class, 'validateToken']);
-    Route::post('/auth/logout', [AuthController::class, 'logout']);
+    Route::post('/auth/logout', [AuthController::class, 'logout']); //OK
     
     //Rotas para editores
     Route::post('/character', [CharacterController::class, 'addCharacter']);
