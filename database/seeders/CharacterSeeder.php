@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
+use App\Models\Character;
+
 
 class characterSeeder extends Seeder
 {
@@ -15,6 +17,8 @@ class characterSeeder extends Seeder
      */
     public function run()
     {
+        Character::factory(5)->create();
+
         DB::table('characters')->insert([
             'name' => 'Homem de Ferro',
             'real_name' => 'Tony Stark',

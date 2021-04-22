@@ -24,9 +24,7 @@ use App\Http\Controllers\{
 */
 
 Route::get('/ping', function() {
-    echo auth()->guard('api')->check();
-    
-    /* return ['pong' => true]; */
+    return ['pong' => true];
 });
 
 //rotas publicas
@@ -109,9 +107,11 @@ Route::middleware(['auth:api', 'check.editor'])->group(function(){
 
 Route::middleware(['auth:api', 'check.adm'])->group(function(){
     //Rotas para administrador
-    Route::get('/users', [UserController::class, 'getList']);
-    Route::put('/approve', [UserController::class, 'approveUser']);
-    Route::delete('/user', [UserController::class, 'deleteUser']);
+    Route::get('/users', [UserController::class, 'getList']); //OK
+    //input: name, limit, offset, orderBy: name, email
+    Route::put('/approve/{id}', [UserController::class, 'approveUser']); //OK
+    //input OBRIGATORIO: type: editor, adm
+    Route::delete('/user/{id}', [UserController::class, 'delUser']); //OK
 });
 
 

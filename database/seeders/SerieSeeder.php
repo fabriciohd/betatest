@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
+use App\Models\Serie;
+
 class SerieSeeder extends Seeder
 {
     /**
@@ -14,6 +16,8 @@ class SerieSeeder extends Seeder
      */
     public function run()
     {
+        Serie::factory(5)->create();
+
         DB::table('series')->insert([
             'title' => 'WandaVision',
             'release_date' => '2021-03-05',

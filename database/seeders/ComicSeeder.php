@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
+use App\Models\Comic;
+
 class comicSeeder extends Seeder
 {
     /**
@@ -14,6 +16,8 @@ class comicSeeder extends Seeder
      */
     public function run()
     {
+        Comic::factory(5)->create();
+
         DB::table('comics')->insert([
             'title' => 'Os vingadores #1',            
             'published_date' => '1963-09-25',            

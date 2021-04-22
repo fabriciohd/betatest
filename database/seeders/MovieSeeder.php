@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
+use App\Models\Movie;
+
 class MovieSeeder extends Seeder
 {
     /**
@@ -14,6 +16,9 @@ class MovieSeeder extends Seeder
      */
     public function run()
     {
+        Movie::factory(5)->create();
+
+
         DB::table('movies')->insert([
             'title' => 'Vingadores: Era de Ultron',
             'release_date' => '2015-04-23',
