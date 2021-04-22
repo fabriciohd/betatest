@@ -1,6 +1,6 @@
 # BetaTestMarvel API
 
-API REST para teste de proeficiencia da [Beta Sistemas](https://betasistemas.com/beta/)
+API REST para teste de proficiência da [Beta Sistemas](https://betasistemas.com/beta/)
 
 Desde já agradeço a oportunidade. E parabenizo pela elaboração do teste, que é objetivo, simples, e ao mesmo tempo desafiador.
 
@@ -34,7 +34,7 @@ Rode as migrations e os seeders para criar as tabelas e popular os campos nesces
 ```
 php artisan migrate --seed
 ```
-Existem factorys para teste, caso não queira usa-las, basta comentar a primeira linha da classe run de cada uma das seeders, ex:
+Existem factories para teste, caso não queira usa-las, basta comentar a primeira linha da função run de cada uma das seeders, ex:
 <br>
 ![](https://i.imgur.com/fwUcbVU.png)
 
@@ -46,7 +46,7 @@ Todas as contas criadas devem passar por aprovação de um usuário administrado
 <a id="methods"></a>
 
 ## Métodos
-Todas as requisições seguem o seguinta padrão:
+Todas as requisições seguem o seguinte padrão:
 | Método | Descrição |
 |---|---|
 | `GET` | Retorna informações de um ou mais registros. |
@@ -57,6 +57,7 @@ Todas as requisições seguem o seguinta padrão:
 <a id="responses"></a>
 
 ## Respostas
+Prováveis respostas às requisições.
 | Código | Descrição |
 |---|---|
 | `200` | Requisição executada com sucesso.|
@@ -114,7 +115,7 @@ Todas as requisições seguem o seguinta padrão:
 | Método | Endpoint | Parâmetros Requeridos | Parâmetros Opcionais | Resumo |
 |---|---|---|---|---|
 | `GET` | /users | | [`name`](#name) [`limit`](#limit) [`offset`](#offset) [`orderBy`](#orderBy) | Lista os usuários disponíveis. |
-| `PUT` | /approve/{id} | [`type`]("#type") | | Altera o tipo do usuário pelo {id} |
+| `PUT` | /approve/{id} | [`type`](#type) | | Altera o tipo do usuário pelo {id} |
 | `DELETE` | /user/{id} | | | Remove o Usuário pelo {id} |
 
 
@@ -137,5 +138,8 @@ Todas as requisições seguem o seguinta padrão:
 | <a id="release_date"></a> `release_date` | | Insere a data de lançamento do filme ou série. (`string YYYY-mm-dd`) | Altera a data de lançamento do filme ou série. (`string YYYY-mm-dd`) | |
 | <a id="writer"></a> `writer` | | Insere o nome do escritor da HQ. (`string`) | Altera o nome do escritor da HQ. (`string`) | |
 | <a id="penciler"></a> `penciler` | | Insere o nome do desenhista da HQ. (`string`) | Altera o nome do desenhista da HQ. (`string`) | |
+| <a id="id_comics"></a> `id_comics` | | Adiciona as HQ's em que o personagem esteve presente.  (`int`) | Altera as HQ's em que o personagem esteve presente.  (`int`) | |
+| <a id="id_movies"></a> `id_movies` | | Adiciona os filmes em que o personagem esteve presente.  (`int`) | Altera os filmes em que o personagem esteve presente.  (`int`) | |
+| <a id="id_series"></a> `id_series` | | Adiciona as séries em que o personagem esteve presente.  (`int`) | Altera as séries em que o personagem esteve presente.  (`int`) | |
 | <a id="type"></a> `type` | | | Define um novo cargo ao usuário.(`string`)(Aceitos: `editor` `adm`) | |
 > Observação: Parâmetros que podem necessitar de mais de um valor, como [`writer`](#writer), [`penciler`](#penciler), [`id_movies`](#id_movies) etc., devem ser preenchidos separando-os com ",". Ex: valor1,valor2,valor3.
