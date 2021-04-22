@@ -73,6 +73,9 @@ Route::get('/serie/{id}/images', [SerieController::class, 'getImages']); //OK
 
 //Rotas autenticadas
 Route::post('/auth/logout', [AuthController::class, 'logout'])->middleware('auth:api'); //OK
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
 Route::middleware(['auth:api', 'check.editor'])->group(function(){
     //Rotas para editores
@@ -115,6 +118,4 @@ Route::middleware(['auth:api', 'check.adm'])->group(function(){
 });
 
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
