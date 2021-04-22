@@ -65,7 +65,7 @@ Prováveis respostas às requisições.
 | `404` | Registro ou rota pesquisada não encontrada (Not found).|
 | `422` | Erro de validação de campo ou fora do escopo definido para o campo.|
 
-<a id="configs"></a>
+<a id="routes"></a>
 
 ## Endpoints
 ### Rotas Públicas
@@ -118,6 +118,7 @@ Prováveis respostas às requisições.
 | `PUT` | /approve/{id} | [`type`](#type) | | Altera o tipo do usuário pelo {id} |
 | `DELETE` | /user/{id} | | | Remove o Usuário pelo {id} |
 
+<a id="params"></a>
 
 ## Parâmetros
 | Parâmetro | GET | POST | PUT | DELETE |
