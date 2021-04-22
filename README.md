@@ -68,4 +68,21 @@ Todas as requisições seguem o seguinta padrão:
 ### Rotas Públicas
 | Método | Endpoint | Parâmetros Requeridos | Parâmetros Opcionais | Resumo |
 |---|---|---|---|---|
-| `GET` | /characters | | [`name`](#name) [`comic`](#comic) [`movie`](#movie) [`serie`](#serie) [`limit`](#limit) [`offset`](#offset) | Lista os personagens disponíveis. |
+| `GET` | /characters | | [`name`](#name) [`comic`](#comic) [`movie`](#movie) [`serie`](#serie) [`limit`](#limit) [`offset`](#offset) | Lista id, nome, e capa, dos personagens disponíveis. |
+| `GET` | /character/{id} | | | Retorna todas as informações do personagem selecionado pelo {id}. |
+| `GET` | /character/{id}/comics | | [`limit`](#limit) [`offset`](#offset) | Retorna as HQ's em que o personagem selecionado pelo {id} participa. |
+| `GET` | /character/{id}/movies | | [`limit`](#limit) [`offset`](#offset) | Retorna os filmes em que o personagem selecionado pelo {id} participa. |
+| `GET` | /character/{id}/series | | [`limit`](#limit) [`offset`](#offset) | Retorna as séries em que o personagem selecionado pelo {id} participa. |
+| `GET` | /character/{id}/images | | [`limit`](#limit) [`offset`](#offset) | Retorna as imagens em que o personagem selecionado pelo {id} está. |
+| `GET` | /comics | | [`title`](#name) [`character`](#comic) [`limit`](#limit) [`offset`](#offset) | Lista id, título, e capa, das HQ's disponíveis. |
+| `GET` | /comic/{id} | | | Retorna todas as informações da HQ selecionada pelo {id}. |
+| `GET` | /comic/{id}/characters | | | Retorna os personagens que participam da HQ selecionada pelo {id}. |
+| `GET` | /comic/{id}/images | | [`limit`](#limit) [`offset`](#offset) | Retorna as imagens em que a HQ selecionada pelo {id} está. |
+| `GET` | /movies | | [`title`](#name) [`character`](#comic) [`limit`](#limit) [`offset`](#offset) | Lista id, título, e capa, dos filmes disponíveis. |
+| `GET` | /movie/{id} | | | Retorna todas as informações do filme selecionado pelo {id}. |
+| `GET` | /movie/{id}/characters | | | Retorna os personagens que participam do filme selecionado pelo {id}. |
+| `GET` | /movie/{id}/images | | [`limit`](#limit) [`offset`](#offset) | Retorna as imagens em que o filme selecionado pelo {id} está. |
+| `GET` | /series | | [`title`](#name) [`character`](#comic) [`limit`](#limit) [`offset`](#offset) | Lista id, título, e capa, das séries disponíveis. |
+| `GET` | /serie/{id} | | | Retorna todas as informações da série selecionada pelo {id}. |
+| `GET` | /serie/{id}/characters | | | Retorna os personagens que participam da série selecionada pelo {id}. |
+| `GET` | /serie/{id}/images | | [`limit`](#limit) [`offset`](#offset) | Retorna as imagens em que a série selecionada pelo {id} está. |
