@@ -68,4 +68,4 @@ Todas as requisições seguem o seguinta padrão:
 ### Rotas Públicas
 | Método | Endpoint | Parâmetros Requeridos | Parâmetros Opcionais | Resumo |
 |---|---|
-| `GET` | /characters | | <details><summary>`name`</summary> Lista personagens por nome igual ou parecido </details> `comic` `movie` `serie` `limit` `offset` | Lista os personagens disponíveis. |
+| `GET` | /characters | | [`name`](#name) [`comic`](#name) [`movie`](#name) [`serie`](#name) [`limit`](#name) [`offset`](#name) | Lista os personagens disponíveis. |
