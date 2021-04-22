@@ -34,7 +34,7 @@ Route::post('/auth/register', [AuthController::class, 'register']); //OK
 
 
 Route::get('/characters', [CharacterController::class, 'getList']); //OK
-//input: name,comic,movie,series,limit,offset
+//input: name,comic,movie,serie,limit,offset
 Route::get('/character/{id}', [CharacterController::class, 'getCharacter']); //OK
 Route::get('/character/{id}/comics', [CharacterController::class, 'getComics']); //OK
 //input: limit, offset

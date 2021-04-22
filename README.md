@@ -1,62 +1,71 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# BetaTestMarvel API
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+API REST para teste de proeficiencia da [Beta Sistemas](https://betasistemas.com/beta/)
 
-## About Laravel
+Desde já agradeço a oportunidade. E parabenizo pela elaboração do teste, que é objetivo, simples, e ao mesmo tempo desafiador.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Documentação para acesso via API:
+* [**Configurações**](#configs)
+* [**Métodos**](#methods)
+* [**Respostas**](#responses)
+* [**Rotas**](#routes)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<a id="configs"></a>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Configurações do projeto
+Requisitos mínimos:
+- [PHP ^7.2](https://www.php.net)
+- [Mysql 5.5.5-10.4.17-MariaDB](https://www.mysql.com)
+- [Composer](https://getcomposer.org)
 
-## Learning Laravel
+Framework utilizado:
+- [Laravel ^8.37](https://laravel.com/docs/8.x)
+<br>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Primeiramente, ao abrir o projeto, lembre-se de instalar as dependências:
+```
+composer install
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Após instalar as dependências, copie o arquivo `.env.example` e renomeie para `.env`, se preciso, faça as configurações necessárias e crie o banco de dados local em sua máquina .
 
-## Laravel Sponsors
+Rode as migrations e os seeders para criar as tabelas e popular os campos nescessários:
+```
+php artisan migrate --seed
+```
+Existem factorys para teste, caso não queira usa-las, basta comentar a primeira linha da classe run de cada uma das seeders, ex:
+![](https://i.imgur.com/fwUcbVU.png)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Todas as contas criadas devem passar por aprovação de um usuário administrador, que decidirá se o usuário será um editor ou um administrador, para isso, existe um administrador padrão para gerenciar a primeira conta criada, depois você pode remove-lo com o endpoint de remoção.
+- Login no sistema (usuário admin padrão):
+  - email: **adm@betasistemas.com**
+  - Senha: **123**
 
-### Premium Partners
+<a id="methods"></a>
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/)**
-- **[OP.GG](https://op.gg)**
+## Métodos
+Todas as requisições seguem o seguinta padrão:
+| Método | Descrição |
+|---|---|
+| `GET` | Retorna informações de um ou mais registros. |
+| `POST` | Cria um novo registro. |
+| `PUT` | Atualiza ou altera os dados de um registro. |
+| `DELETE` | Remove um registro. |
 
-## Contributing
+<a id="responses"></a>
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Respostas
+| Código | Descrição |
+|---|---|
+| `200` | Requisição executada com sucesso.|
+| `401` | Dados de acesso inválidos.|
+| `404` | Registro ou rota pesquisada não encontrada (Not found).|
+| `422` | Erro de validação de campo ou fora do escopo definido para o campo.|
 
-## Code of Conduct
+<a id="configs"></a>
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Endpoints
+### Rotas Públicas
+| Método | Endpoint | Parâmetros Requeridos | Parâmetros Opcionais | Resumo |
+|---|---|
+| `GET` | /characters | | <details><summary>`name`</summary> Lista personagens por nome igual ou parecido </details> `comic` `movie` `serie` `limit` `offset` | Lista os personagens disponíveis. |
