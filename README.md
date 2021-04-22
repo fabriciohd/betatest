@@ -113,13 +113,28 @@ Todas as requisições seguem o seguinta padrão:
 | Método | Endpoint | Parâmetros Requeridos | Parâmetros Opcionais | Resumo |
 |---|---|---|---|---|
 | `GET` | /users | | [`name`](#name) [`limit`](#limit) [`offset`](#offset) [`orderBy`](#orderBy) | Lista os usuários disponíveis. |
-| `PUT` | /approve/{id} | [`type`]("test text") | | Altera o tipo do usuário pelo {id} |
+| `PUT` | /approve/{id} | [`type`]("#type") | | Altera o tipo do usuário pelo {id} |
 | `DELETE` | /user/{id} | | | Remove o Usuário pelo {id} |
 
 
 ## Parâmetros
 | Parâmetro | GET | POST | PUT | DELETE |
 |---|---|---|---|---|
-| <a id="name"></a> `name` | Pesquisa pelo nome igual ou parecido inserido | Nome do personagem, ou usuário | Novo nome para o personagem. | |
-| <a id="name"></a> `name` | Pesquisa pelo nome igual ou parecido inserido | Nome do personagem, ou usuário | Novo nome para o personagem. | |
+| <a id="name"></a> `name` | Pesquisa pelo nome igual ou parecido inserido. (`string`) | Nome do personagem, ou usuário. (`string`) | Novo nome para o personagem. (`string`) | |
+| <a id="real_name"></a> `real_name` | | Insere o nome real (alter ego) do personagem. (`string`) | Altera o nome real (alter ego) do personagem. (`string`) | |
+| <a id="resume"></a> `resume` | | Insere um resumo do personagem, HQ, filme ou série. (`string`) | Altera o resumo do personagem, HQ, filme ou série. (`string`) | |
+| <a id="cover_url"></a> `cover_url` | | Insere uma imagem de capa para personagem, HQ, filme ou série (link da imagem). (`string`) | Altera a imagem de capa do personagem, HQ, filme ou série (link da imagem). (`string`) | |
+| <a id="image"></a> `image` | | Insere uma imagem de capa para personagem, HQ, filme ou série (se inserido junto com cover_url, esse parâmetro será ignorado). (`file`) | Altera a imagem de capa do personagem, HQ, filme ou série (se inserido junto com cover_url, esse parâmetro será ignorado). (`file`) | |
+| <a id="character"></a> `character` | Retorna apenas as HQ's, filmes ou séries em que o personagem está inserido. (`int`) | | | |
+| <a id="comic"></a> `comic` | Retorna apenas os personagens que estão na HQ inserida. (`int`)  | | | |
+| <a id="movie"></a> `movie` | Retorna apenas os personagens que estão no filme inserido. (`int`)  | | | |
+| <a id="serie"></a> `serie` | Retorna apenas os personagens que estão na série inserida. (`int`)  | | | |
+| <a id="limit"></a> `limit` | Define a quantidade máxima de resultados que serão obtidos na requisição, se nenhum valor for passado limit assume o máximo de 20. (`int`)  | | | |
+| <a id="offset"></a> `offset` | Pula a quantidade definida (em offset) de resultados na requisição. (`int`)  | | | |
+| <a id="title"></a> `title` | Pesquisa pelo título igual ou parecido inserido. (`string`)  | Título da HQ, filme ou série a ser inserido. (`string`) | Novo título para a HQ, filme ou série. (`string`) | |
+| <a id="published_date"></a> `published_date` | | Insere a data de publicação da HQ. (`string YYYY-mm-dd`) | Altera a data de publicação da HQ. (`string YYYY-mm-dd`) | |
+| <a id="published_date"></a> `published_date` | | Insere a data de lançamento do filme ou série. (`string YYYY-mm-dd`) | Altera a data de lançamento do filme ou série. (`string YYYY-mm-dd`) | |
+| <a id="writer"></a> `writer` | | Insere o nome do escritor da HQ. (`string`) | Altera o nome do escritor da HQ. (`string`) | |
+| <a id="penciler"></a> `penciler` | | Insere o nome do desenhista da HQ. (`string`) | Altera o nome do desenhista da HQ. (`string`) | |
+| <a id="type"></a> `type` | | | Define um novo cargo ao usuário.(`string`)(Aceitos: `editor` `adm`) | |
 
