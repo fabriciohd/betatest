@@ -97,25 +97,29 @@ Todas as requisições seguem o seguinta padrão:
 #### Rotas para editor
 | Método | Endpoint | Parâmetros Requeridos | Parâmetros Opcionais | Resumo |
 |---|---|---|---|---|
-| `POST` | /character | `name` `real_name` `resume` | `cover_url` `image` `id_comics` `id_movies` `id_series` | Adiciona um novo personagem. |
-| `PUT` | /character/{id} | | `name` `real_name` `resume` `cover_url` `image` `id_comics` `id_movies` `id_series` | Altera dados de um personagem pelo {id}. |
+| `POST` | /character | [`name`](#name) [`real_name`](#real_name) [`resume`](#resume) | [`cover_url`](#cover_url) [`image`](#image) [`id_comics`](#id_comics) [`id_movies`](#id_movies) [`id_series`](#id_series) | Adiciona um novo personagem. |
+| `PUT` | /character/{id} | | [`name`](#name) [`real_name`](#real_name) [`resume`](#resume) [`cover_url`](#cover_url) [`image`](#image) [`id_comics`](#id_comics) [`id_movies`](#id_movies) [`id_series` ](#id_series) | Altera dados de um personagem pelo {id}. |
 | `DELETE` | /character/{id} | | | Remove o personagem pelo {id}. |
-| `POST` | /comic | `title` `published_date` `writer` `penciler` `resume` | `cover_url` `image` | Adiciona uma nova HQ. |
-| `PUT` | /comic/{id} | | `title` `published_date` `writer` `penciler` `resume` `cover_url` `image` | Altera dados de uma HQ pelo {id}. |
+| `POST` | /comic | [`title`](#title) [`published_date`](#published_date) [`writer`](#writer) [`penciler`](#penciler) [`resume`](#resume) | [`cover_url`](#cover_url) [`image`](#image) | Adiciona uma nova HQ. |
+| `PUT` | /comic/{id} | | [`title`](#title) [`published_date`](#published_date) [`writer`](#writer) [`penciler`](#penciler) [`resume`](#resume) [`cover_url`](#cover_url) [`image`](#image) | Altera dados de uma HQ pelo {id}. |
 | `DELETE` | /comic/{id} | | | Remove a HQ pelo {id}. |
-| `POST` | /movie | `title` `release_date` `director` `resume` | `cover_url` `image` | Adiciona um novo filme. |
-| `PUT` | /movie/{id} | | `title` `release_date` `director` `resume` `cover_url` `image` | Altera dados de um filme pelo {id}. |
+| `POST` | /movie | [`title`](#title) [`release_date`](#release_date) [`director`](#director) [`resume`](#resume) | [`cover_url`](#cover_url) [`image`](#image) | Adiciona um novo filme. |
+| `PUT` | /movie/{id} | | [`title`](#title) [`release_date`](#release_date) [`director`](#director) [`resume`](#resume) [`cover_url`](#cover_url) [`image`](#image) | Altera dados de um filme pelo {id}. |
 | `DELETE` | /movie/{id} | | | Remove o filme pelo {id}. |
-| `POST` | /serie | `title` `release_date` `director` `resume` | `cover_url` `image` | Adiciona uma nova série. |
-| `PUT` | /serie/{id} | | `title` `release_date` `director` `resume` `cover_url` `image` | Altera dados de uma série pelo {id}. |
+| `POST` | /serie | [`title`](#title) [`release_date`](#release_date) [`director`](#director) [`resume`](#resume) | [`cover_url`](#cover_url) [`image`](#image) | Adiciona uma nova série. |
+| `PUT` | /serie/{id} | | [`title`](#title) [`release_date`](#release_date) [`director`](#director) [`resume`](#resume) [`cover_url`](#cover_url) [`image`](#image) | Altera dados de uma série pelo {id}. |
 | `DELETE` | /serie/{id} | | | Remove a série pelo {id}. |
 #### Rotas para administrador
 | Método | Endpoint | Parâmetros Requeridos | Parâmetros Opcionais | Resumo |
 |---|---|---|---|---|
-| `GET` | /users | | `name` `limit` `offset` `orderBy` | Lista os usuários disponíveis. |
-| `PUT` | /approve/{id} | `type` | | Altera o tipo do usuário pelo {id} |
+| `GET` | /users | | [`name`](#name) [`limit`](#limit) [`offset`](#offset) [`orderBy`](#orderBy) | Lista os usuários disponíveis. |
+| `PUT` | /approve/{id} | [`type`]("test text") | | Altera o tipo do usuário pelo {id} |
 | `DELETE` | /user/{id} | | | Remove o Usuário pelo {id} |
 
 
-
+## Parâmetros
+| Parâmetro | GET | POST | PUT | DELETE |
+|---|---|---|---|---|
+| <a id="name"></a> `name` | Pesquisa pelo nome igual ou parecido inserido | Nome do personagem, ou usuário | Novo nome para o personagem. | |
+| <a id="name"></a> `name` | Pesquisa pelo nome igual ou parecido inserido | Nome do personagem, ou usuário | Novo nome para o personagem. | |
 
